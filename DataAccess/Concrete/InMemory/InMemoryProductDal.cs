@@ -23,13 +23,13 @@ namespace DataAccess.Concrete.InMemory
         }
         public void Add(Product product)
         {
-            Product productToDelete =  _products.SingleOrDefault(p=>p.ProductId==product.ProductId);
-
+           
             _products.Add(product);
         }
 
         public void Delete(Product product)
         {
+            Product productToDelete =  _products.SingleOrDefault(p=>p.ProductId==product.ProductId);
 
             _products.Remove(product);
         }
