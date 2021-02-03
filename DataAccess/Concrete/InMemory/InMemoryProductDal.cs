@@ -31,7 +31,7 @@ namespace DataAccess.Concrete.InMemory
         {
             Product productToDelete =  _products.SingleOrDefault(p=>p.ProductId==product.ProductId);
 
-            _products.Remove(product);
+            _products.Remove(productToDelete);
         }
 
         public List<Product> GetAll()
