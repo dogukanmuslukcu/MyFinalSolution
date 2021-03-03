@@ -19,6 +19,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.IOC;
+using Core.Extensions;
+using Business.DependencyResolvers;
 
 namespace WebAPI
 {
@@ -37,8 +39,7 @@ namespace WebAPI
             //AOP
             //Auotdac , Ninject , CastleWindsor , StructureMap , LightInject , DryInject --> IoC  Container
             services.AddControllers();
-            //  services.AddSingleton<IProductService,ProductManager>();
-            //services.AddSingleton<IProductDal, EfProductDal>();
+            
 
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
@@ -56,7 +57,9 @@ namespace WebAPI
                         IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
                     };
                 });
-            ServiceTool.Create(services);
+            services.AddDependencyResolvers(new ICoreModule[] {
+            new CoreModule()
+            });
         }
 
 
